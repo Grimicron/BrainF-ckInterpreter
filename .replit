@@ -1,0 +1,15 @@
+compile = ["gcc", "bf.c", "-o", "bf", "-w"]
+run = "./bf programs/inputtest.bf"
+entrypoint = "main.c"
+hidden = ["main", "main-debug", "**/*.o", "**/*.d", ".ccls-cache", "Makefile"]
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".ccls-cache"]
+
+[languages]
+
+[languages.c]
+pattern = "**/*.{c,h}"
+
+[languages.c.languageServer]
+start = "ccls"

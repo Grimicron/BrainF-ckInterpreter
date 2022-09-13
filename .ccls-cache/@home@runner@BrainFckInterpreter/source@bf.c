@@ -28,10 +28,8 @@ void print(){
 }
 
 void input(){
-    char c[1];
-    scanf("%s", c);
+    int c = getchar();getchar();
     tape[cc] = c[0];
-    if ('~' == c[0]) tape[cc] = -1;
 }
 
 void run(){

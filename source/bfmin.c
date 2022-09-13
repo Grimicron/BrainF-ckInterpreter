@@ -1,20 +1,10 @@
 #include <stdio.h>
-FILE *f;int t[30000];int p=0;
-void s(int d){p+=d;if(p<0)p=29999;else if(p>29999)p=0;}
-void m(int a){t[p]+=a;}
-void o(){if(t[p]==-1)printf("EOF");else printf("%c",t[p]);}
-void i(){char c[1];scanf("%s",c);t[p]=c[0];if('~'==c[0])t[p]=-1;}
-void run(){
-    int ls[1000],ld=-1,lb=-1;char c;
-    while((c=getc(f))!=EOF){
-        if(lb>=0){if('['==c)++lb;if(']'==c)--lb;continue;}
-        switch(c){
-            case'<':s(-1);break;
-            case'>':s(1);break;
-            case'+':m(1);break;
-            case'-':m(-1);break;
-            case'.':o();break;
-            case',':i();break;
-            case'[':if(t[p]){++ld;ls[ld]=ftell(f);}else lb=0;break;
-            case']':if(t[p])fseek(f,ls[ld],0);else --ld;break;}}}
-int main(int c,char *v[]){if(c < 1)return 1;f=fopen(v[1],"r");if(f==NULL)return 2;run();fclose(f);return 0;}
+FILE *f;int t[30000];int p=0,l[1000],ld=-1,lb=0;char u;
+void s(int d){if(!lb){p+=d;if(p<0)p=29999;else if(p>29999)p=0;}}void sl(){s(-1);};void sr(){s(1);};
+void m(int a){if(!lb){t[p]+=a;}}void mp(){m(1);};void mm(){m(-1);};
+void o(){if(!lb){if(!(t[p]+1))printf("EOF");else putchar(t[p]);}}
+void i(){if(!lb){char c=getchar();t[p]=c;if(!(c-126))t[p]=-1;}}
+void b(){if(!lb){if(t[p]){++ld;l[ld]=ftell(f);}else ++lb;}else ++lb;}
+void e(){if(!lb){if(t[p])fseek(f,l[ld],0);else --ld;}else --lb;}
+void(*lu[])()={&mp,&i,&mm,&o,0,0,0,0,0,0,0,0,0,0,0,0,0,&sl,0,&sr,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,&b,0,&e};
+int main(int c,char **v){if(!c)return 1;f=fopen(v[1],"r");if(!f)return 2;while((u=getc(f))+1){if((u-=43)+1&&u<51&&lu[u])lu[u]();}return fclose(f);};

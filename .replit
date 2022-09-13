@@ -1,4 +1,4 @@
-compile = ["gcc", "source/bf.c", "-o", "bf", "-w"]
+compile = ["gcc", "source/bfmin.c", "-o", "bf", "-w"]
 run = "./bf programs/helloworld.bf"
 entrypoint = "main.c"
 hidden = ["main", "main-debug", "**/*.o", "**/*.d", ".ccls-cache", "Makefile"]
